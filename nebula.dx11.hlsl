@@ -38,6 +38,13 @@ float snoise(float2 uv)
   return lerp(lerp(a, b, fuv.x), lerp(c, d, fuv.x), fuv.y) * 2 - 1;
 }
 
+float get_random(float2 uv, float min, float max)
+{
+  float ret = hash(uv);
+  
+  return ret * (max - min) + min;
+}
+
 float fbm(float2 uv, int octaves)
 {
   float amp = 1.0;
@@ -62,10 +69,34 @@ float2 perturb(float2 uv, float str, float freq)
   return uv + displacement * str;
 }
 
+float4 generate_star_layer(float2 uv, int layerIndex, float probStar)
+{
+  float gridSize = 10 + layerIndex * 5;
+  
+  float2 cellId = floor(uv * gridSize);
+  
+  if (hash(cellId + float2(12.34, 56.78)) > probStar)
+    return float4(0,0,0,1);
+  
+  float2 cellUV = frac(uv * gridSize);
+  float  radius = (5 - layerIndex) * 0.0025;
+
+  float2 center = float2(get_random(cellId + float2(12.34, 56.78), radius, 1 - radius), get_random(cellId + float2(78.91, 523.45), radius, 1 - radius));
+  
+  
+  float  v = length(cellUV - center);
+  v = saturate(-(v - radius));
+  
+  v = (v > 0) ? (1) : (0);
+  
+  return float4(v,v,v,1);
+}
+
 float4 main( float4 position : SV_POSITION, float2 TexCoord : TEXCOORD ) : SV_TARGET
 {
 	float2 uv = TexCoord;
-	uv /= float2(v2Resolution.y / v2Resolution.x, 1);
+  float aspect = v2Resolution.y / v2Resolution.x;
+	uv /= float2(aspect, 1);
 
   float2 newUV = perturb(uv * 2, 0.6, 1.0);
   float n = fbm(newUV, 8) * 0.5 + 0.5;
@@ -74,7 +105,15 @@ float4 main( float4 position : SV_POSITION, float2 TexCoord : TEXCOORD ) : SV_TA
   
   float4 col = gradient1.Sample(smp, float2(n * 0.98 + 0.01, 0.5));
   
-  col = lerp(float4(0,0,0,1), float4(col.xyz, 1), col.a);
+  float4 backgroundCol = lerp(float4(0,0,0,1), float4(col.xyz, 1), col.a);
   
-  return float4(col.xyz, 1);
+  col = float4(0,0,0,0);
+  for (int i = 0; i < 4; i++)
+  {
+    col += generate_star_layer(uv, i, 0.75) * (4 - i) * 0.25;
+  }
+  
+  col = saturate(backgroundCol + col);
+  
+  return float4(col.rgb, 1);
 }
