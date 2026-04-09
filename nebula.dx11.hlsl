@@ -45,7 +45,19 @@ float get_random(float2 uv, float min, float max)
   return ret * (max - min) + min;
 }
 
-float fbm(float2 uv, int octaves)
+float2 get_noise_displacement(float2 uv, float str, float freq)
+{
+  float2 displacement = float2(snoise(uv * freq), snoise(uv * 1.2345 * freq));
+     
+  return displacement * str;
+}
+
+float2 perturb(float2 uv, float str, float freq)
+{
+  return uv + get_noise_displacement(uv, str, freq);
+}
+
+float fbm(float2 uv, int octaves, int minOctaveDisplacement, float intensity)
 {
   float amp = 1.0;
   float totalAmp = 0.0;
@@ -53,20 +65,18 @@ float fbm(float2 uv, int octaves)
   
   for (int i = 0; i < octaves; i++)
   {
-    n = n + amp * snoise(uv);
+    float2 animUV = uv;
+    if (i >= minOctaveDisplacement)
+    {
+      animUV = animUV + 0.5 * fGlobalTime * normalize(get_noise_displacement(animUV, intensity, 0.001));
+    }
+    n = n + amp * snoise(animUV);
     totalAmp += amp;
     uv *= 2.0;
     amp *= 0.5;
   }
   
   return n / totalAmp;  
-}
-
-float2 perturb(float2 uv, float str, float freq)
-{
-  float2 displacement = float2(snoise(uv * freq), snoise(uv * 1.2345 * freq));
-     
-  return uv + displacement * str;
 }
 
 float4 generate_star_layer(float2 uv, int layerIndex, float probStar)
@@ -99,7 +109,7 @@ float4 main( float4 position : SV_POSITION, float2 TexCoord : TEXCOORD ) : SV_TA
 	uv /= float2(aspect, 1);
 
   float2 newUV = perturb(uv * 2, 0.6, 1.0);
-  float n = fbm(newUV, 8) * 0.5 + 0.5;
+  float n = fbm(newUV, 8, 4, 0.1) * 0.5 + 0.5;
   n = pow(n, 0.75);
   n = saturate(smoothstep(0.25, 1, n));
   
