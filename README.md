@@ -15,3 +15,18 @@
 
 # SDF 4 - Hard shadows
 ![sdf04_hard_shadows](sdf04_hard_shadows.png)
+
+# SDF 5 - Soft shadows
+![sdf05_soft_shadows](sdf05_soft_shadows.png)
+
+# Future experiments
+
+* Lighting
+  * Atmospherics - bloom
+  * Heat haze
+  * Ambient Occlusion
+  * Reflections
+* Modelling
+  * Repetition elements
+  * Camera look at
+  * Spiral DNA
