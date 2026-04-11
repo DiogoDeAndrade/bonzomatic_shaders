@@ -19,12 +19,14 @@
 # SDF 5 - Soft shadows
 ![sdf05_soft_shadows](sdf05_soft_shadows.png)
 
+# SDF 6 - Ambient Occlusion (hemisphere and normal sampling)
+![sdf06_ao](sdf06_ao.png)
+
 # Future experiments
 
 * Lighting
   * Atmospherics - bloom
   * Heat haze
-  * Ambient Occlusion
   * Reflections
 * Modelling
   * Repetition elements
