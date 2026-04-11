@@ -12,3 +12,6 @@
 
 # SDF 3 - Lighting
 ![sdf03_lighting](sdf03_lighting.png)
+
+# SDF 4 - Hard shadows
+![sdf04_hard_shadows](sdf04_hard_shadows.png)
