@@ -28,7 +28,13 @@
   * Atmospherics - bloom
   * Heat haze
   * Reflections
+  * Refraction
+* Feedback loops
+  * Particle systems
+  * Motion/Image blur
 * Modelling
+  * Displacement
   * Repetition elements
   * Camera look at
   * Spiral DNA
+  * Cat
