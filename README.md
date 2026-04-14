@@ -22,10 +22,16 @@
 # SDF 6 - Ambient Occlusion (hemisphere and normal sampling)
 ![sdf06_ao](sdf06_ao.png)
 
+# SDF 7 - Fog
+![sdf07_fog](sdf07_fog.png)
+
+# SDF 8 - Scattering
+![sdf08_scattering](sdf08_scattering.png)
+
 # Future experiments
 
 * Lighting
-  * Atmospherics - bloom
+  * Emissive-based lighting
   * Heat haze
   * Reflections
   * Refraction
