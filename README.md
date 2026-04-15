@@ -25,22 +25,36 @@
 # SDF 7 - Fog
 ![sdf07_fog](sdf07_fog.png)
 
-# SDF 8 - Scattering
+# SDF 8 - Scattering with shadows
+
+Extremely slow with any decent quality
+
 ![sdf08_scattering](sdf08_scattering.png)
+
+# SDF 9 - Emissive-based lighting
+
+Doesn't work too well with multiple sources, only the nearest will be used, but as a proof of concept it was interesting.
+Shadows also don't look proper.
+
+# SDF 10 - Displacement
+
+Displacement works, controlled by the FFT... Not very convinced with that, to be honest
+
+![sdf10_displacement](sdf10_displacement.png)
 
 # Future experiments
 
 * Lighting
-  * Emissive-based lighting
   * Heat haze
   * Reflections
   * Refraction
 * Feedback loops
-  * Particle systems
   * Motion/Image blur
+  * Particle systems
 * Modelling
-  * Displacement
-  * Repetition elements
   * Camera look at
+  * Repetition elements
+  * Twist
   * Spiral DNA
   * Cat
+  * Fractals
