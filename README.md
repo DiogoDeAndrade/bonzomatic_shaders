@@ -42,19 +42,32 @@ Displacement works, controlled by the FFT... Not very convinced with that, to be
 
 ![sdf10_displacement](sdf10_displacement.png)
 
+# Terrain
+
+First experiments with terrain, the results are terrible, need to work on that in the future.
+This one also has an experiment with shell-based fur.
+
+![terrain01](terrain01.png)
+
 # Future experiments
 
 * Lighting
   * Heat haze
   * Reflections
   * Refraction
+  * Fur
 * Feedback loops
   * Motion/Image blur
   * Particle systems
 * Modelling
+  * Terrain
   * Camera look at
   * Repetition elements
   * Twist
   * Spiral DNA
+  * Virus
   * Cat
   * Fractals
+    * Tentacle cubes
+  * L-Systems
+  * Wicker weave (https://demarleather.com/wp-content/uploads/2020/03/Demar-Final-524b.jpg)
